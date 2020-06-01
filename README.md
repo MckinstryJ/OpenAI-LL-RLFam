@@ -42,4 +42,4 @@
 </ol>
 
 Report:
-[Reinforcement Learning Family](https://docs.google.com/document/d/1COi30Slc3M_qka92b-udfsq7BWqYjuI-Hp2-IjEQrKg/edit?usp=sharing).
+[Reinforcement Learning Family](https://docs.google.com/document/d/1COi30Slc3M_qka92b-udfsq7BWqYjuI-Hp2-IjEQrKg/edit#heading=h.5kd1fg4k4nmp).
