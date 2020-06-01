@@ -36,20 +36,10 @@
     if __name__ == "__main__":
         run()
 
-<h3>Values Provided in env.step(action):</h3>
-<ul>
-  <li>Observation (from ship's perspective):</li>
-  <ul>
-    <li>obs[0] -> x position</li>
-    <li>obs[1] -> y position</li>
-    <li>obs[2] -> x velocity</li>
-    <li>obs[3] -> y velocity</li>
-    <li>obs[4] -> angle</li>
-    <li>obs[5] -> angle velocity</li>
-    <li>obs[6] -> left leg contact w/ ground</li>
-    <li>obs[7] -> right leg contact w/ ground</li>
-  </ul>
-  <li>reward -> is ship between flags?</li>
-  <li>done? -> has the ship made contact w/ ground?</li>
-</ul>
-  
+<h3>Applied Models</h3>
+<ol>
+  <li><b>Q Learning</b></li>
+</ol>
+
+Report:
+[Reinforcement Learning Family](https://docs.google.com/document/d/1COi30Slc3M_qka92b-udfsq7BWqYjuI-Hp2-IjEQrKg/edit?usp=sharing).
