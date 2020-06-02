@@ -12,9 +12,6 @@
 <h3>Starter Code (to render the ship and take random actions):</h3>
 
     import gym
-    
-    env = gym.make('LunarLander-v2')
-    env.reset()
 
 
     def run(epochs=10):  # Epochs: number of rounds the ship should take.
@@ -34,6 +31,8 @@
 
 
     if __name__ == "__main__":
+        env = gym.make('LunarLander-v2')
+        env.reset()
         run()
 
 <h3>Applied Models</h3>
