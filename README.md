@@ -38,6 +38,7 @@
 <h3>Applied Models</h3>
 <ol>
   <li><b>Q Learning</b></li>
+  <li><b>Deep Q Networks</b></li>
 </ol>
 
 Report:
