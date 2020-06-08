@@ -1,6 +1,10 @@
 # OpenAI-LL-RLFam
 <h2>Applying all known RL models to the OpenAI LunarLanding-v2 Environment</h2>
 
+![DQN](./LL_DQN.gif)
+:--:
+*Lunar Lander via DQN*
+
 <h3>Setting up the Environment:</h3>
 <ul>
   <li>Using Python v3.7 (Anaconda)</li>
@@ -40,10 +44,6 @@
   <li><b>Q Learning</b></li>
   <li><b>Deep Q Networks</b></li>
 </ol>
-
-![DQN](./LL_DQN.gif)
-<br>
-Ship via DQN
 
 Report:
 [Reinforcement Learning Family](https://docs.google.com/document/d/e/2PACX-1vT93-GN6mdClP1zJeyTQUk2YdvQiipTWF4P3O8rW2fca_JH6bMEyQUf8SWP5oTRUD1VP96l5-bfPzYg/pub).
