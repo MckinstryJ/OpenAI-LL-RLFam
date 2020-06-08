@@ -6,11 +6,7 @@ from keras.layers import Dense
 from keras.optimizers import adam
 import matplotlib.pyplot as plt
 from keras.activations import relu, linear
-
 import numpy as np
-env = gym.make('LunarLander-v2')
-env.seed(0)
-np.random.seed(0)
 
 
 class DQN:
@@ -24,7 +20,7 @@ class DQN:
         self.epsilon_min = .01  # Min to Exploration
         self.lr = 0.0005  # Learning Rate
         self.epsilon_decay = .005  # Exploration Decay
-        self.memory = deque(maxlen=1000000)  # Memory w/ limit (frames)
+        self.memory = deque(maxlen=1000000)  # Memory limit of stored states
         self.model = self.build_model()  # Deep Learning Model
 
     def build_model(self):
@@ -46,7 +42,7 @@ class DQN:
         act_values = self.model.predict(state)[0]
         return np.argmax(act_values)
 
-    def retrain(self):
+    def replay(self):
         if len(self.memory) < self.batch_size:
             return
 
@@ -61,13 +57,11 @@ class DQN:
         states = np.squeeze(states)  # squeeze combines all to a single dimension
         next_states = np.squeeze(next_states)
 
-        # Target value - reward + discount * (max action->reward on next states)
-        # TODO: Explain in depth
+        # Target value = reward + discount * (max action -> reward on next states)
         targets = rewards + self.gamma * (np.amax(self.model.predict_on_batch(next_states), axis=1))*(1-dones)
-
-        # Target value - reward for current states
-        # TODO: Explain in depth
+        # Target value = predicted reward for current states
         targets_full = self.model.predict_on_batch(states)
+        # For every index in batch, adjust rewards of current as a portion of the rewards in the future
         ind = np.array([i for i in range(self.batch_size)])
         targets_full[[ind], [actions]] = targets
 
@@ -89,11 +83,10 @@ def run(episodes=100):
         if e > 500 and agent.gamma > .5:
             agent.gamma -= agent.epsilon_decay * 10
 
-        # TODO: Try changing max_steps
-        max_steps = 3000
+        max_steps = 2000
         for i in range(max_steps):
-            # if (e + 1) % int(episodes / 10) == 0:
-            #     env.render()
+            if (e + 1) % int(episodes / 10) == 0:
+                env.render()
 
             action = agent.act(state)
             next_state, reward, done, _ = env.step(action)
@@ -105,7 +98,7 @@ def run(episodes=100):
             state = next_state
 
             # Retraining the Agent
-            agent.retrain()
+            agent.replay()
             if done:
                 print("episode: {}/{}, score: {}".format(e + 1, episodes, score))
                 break
@@ -117,8 +110,13 @@ def run(episodes=100):
 
 
 if __name__ == '__main__':
+    env = gym.make('LunarLander-v2')
+    env.seed(0)
+    np.random.seed(0)
+
     episodes = 1000
     loss = run(episodes=episodes)
+
     plt.title("Avg Reward for Agent at {} Episodes".format(episodes))
     plt.ylabel("Avg Reward")
     plt.plot([i+1 for i in range(0, len(loss), 2)],
