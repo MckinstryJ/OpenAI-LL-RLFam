@@ -4,6 +4,7 @@ from keras import Sequential
 from collections import deque
 from keras.layers import Dense
 from keras.optimizers import adam
+from matplotlib import animation
 import matplotlib.pyplot as plt
 from keras.activations import relu, linear
 import numpy as np
@@ -80,13 +81,10 @@ def run(episodes=100):
         state = np.reshape(state, (1, 8))
         score = 0
 
-        if e > 500 and agent.gamma > .5:
-            agent.gamma -= agent.epsilon_decay * 10
-
-        max_steps = 2000
+        max_steps = 3000
         for i in range(max_steps):
-            if (e + 1) % int(episodes / 10) == 0:
-                env.render()
+            if e+1 == episodes:
+                frames.append(env.render(mode="rgb_array"))
 
             action = agent.act(state)
             next_state, reward, done, _ = env.step(action)
@@ -109,13 +107,28 @@ def run(episodes=100):
     return [np.mean(loss[i-n:i]) for i in range(n, len(loss))]
 
 
+def save_frames_as_gif(frames, path='./', filename='LL_DQN.gif'):
+    plt.figure(figsize=(frames[0].shape[1] / 72.0, frames[0].shape[0] / 72.0), dpi=72)
+
+    patch = plt.imshow(frames[0])
+    plt.axis('off')
+
+    def animate(i):
+        patch.set_data(frames[i])
+
+    anim = animation.FuncAnimation(plt.gcf(), animate, frames = len(frames), interval=50)
+    anim.save(path + filename, writer='pillow', fps=60)
+
+
 if __name__ == '__main__':
     env = gym.make('LunarLander-v2')
     env.seed(0)
     np.random.seed(0)
 
+    frames = []
     episodes = 1000
     loss = run(episodes=episodes)
+    save_frames_as_gif(frames)
 
     plt.title("Avg Reward for Agent at {} Episodes".format(episodes))
     plt.ylabel("Avg Reward")
