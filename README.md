@@ -41,10 +41,11 @@
 
 <h3>Applied Models</h3>
 <ol>
-  <li><b>Q Learning</b>       --->(1000 best: -201.579)</li>
-  <li><b>SARSA</b>            --->(1000 best: -199.765)</li>
-  <li><b>Dyna-Q</b>           --->(1000 best: -194.17)</li>
-  <li><b>Deep Q Networks</b>  --->(1000 best: 236.30)</li>
+  <li><b>Q Learning</b>       <p>--->(1000 best: -201.579)</p></li>
+  <li><b>SARSA</b>            <p>--->(1000 best: -199.765)</p></li>
+  <li><b>Dyna Q</b>           <p>--->(1000 best: -194.17)</p></li>
+  <li><b>Dyna Q+</b>          <p>--->(1000 best: -173.74)</p></li>
+  <li><b>Deep Q Networks</b>  <p>--->(1000 best: 236.30)</p></li>
 </ol>
 
 Report:
