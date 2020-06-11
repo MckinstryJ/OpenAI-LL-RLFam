@@ -51,6 +51,7 @@ class DynaQ(object):
         elif halu:
             bonus_reward = reward + self.k * np.sqrt(last)
             q_obs[action] = (1 - self.alpha) * q_obs[action] + self.alpha * (bonus_reward + self.gamma * max(q_next_obs))
+            return 0
 
 
 def run(epochs=1000, hallucinations=1000):
@@ -79,17 +80,16 @@ def run(epochs=1000, hallucinations=1000):
             if done:
                 obs = env.reset()
 
-        # Increasing the last used metric for all in memory
+        # Increasing the 'last used' metric for all in memory
         for mem in ql.M:
             mem[-2] += 1
         for n in range(hallucinations):
             rand_up = random.choice(ql.M)
-            ql.update(*rand_up)
+            rand_up[-2] = ql.update(*rand_up)
 
         printer.rewards.append(total_reward)
         if ql.explore > ql.explore_min:
             ql.explore -= ql.explore_decay
-            ql.M = ql.M[int(len(ql.M) * (1 - ql.explore)):]
 
     env.close()
 
