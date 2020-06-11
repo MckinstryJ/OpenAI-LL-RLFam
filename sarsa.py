@@ -4,7 +4,7 @@ import rl.printer
 import gym
 
 
-class QL(object):
+class SARSA(object):
     Q = []
     state_space = None
     action_space = None
@@ -50,16 +50,16 @@ class QL(object):
             return np.random.randint(0, self.action_space)
         return np.argmax(self.continous_2_descrete(obs))
 
-    def update(self, action, obs, next_obs, reward):
+    def update(self, action, next_action, obs, next_obs, reward):
         obs = self.continous_2_descrete(obs)
         next_obs = self.continous_2_descrete(next_obs)
 
-        obs[action] = (1 - self.alpha) * obs[action] + self.alpha * (reward + self.gamma * max(next_obs))
+        obs[action] = (1 - self.alpha) * obs[action] + self.alpha * (reward + self.gamma * next_obs[next_action])
 
 
 def run(epochs=10000):
     printer = rl.printer.printer()
-    ql = QL(state_space=8, action_space=env.action_space.n)
+    ql = SARSA(state_space=8, action_space=env.action_space.n)
 
     obs = env.reset()
     for epoch in range(epochs):
@@ -74,8 +74,9 @@ def run(epochs=10000):
                 env.render()
             action = ql.take_action(obs)
             next_obs, reward, done, info = env.step(action)
+            next_action = ql.take_action(next_obs)
 
-            ql.update(action, obs, next_obs, reward)
+            ql.update(action, next_action, obs, next_obs, reward)
             obs = next_obs
 
             total_reward += reward
