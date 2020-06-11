@@ -96,4 +96,5 @@ def run(epochs=1000, hallucinations=1000):
 
 if __name__ == "__main__":
     env = gym.make('LunarLander-v2')
+    env.seed(120)
     run(epochs=1000, hallucinations=1000)
