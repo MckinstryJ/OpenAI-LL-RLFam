@@ -2,6 +2,9 @@ import numpy as np
 
 
 class printer(object):
+    """
+        Simple print class for specific formats
+    """
     rewards = []
 
     def __init__(self):
