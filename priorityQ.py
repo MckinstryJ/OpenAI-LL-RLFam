@@ -31,7 +31,7 @@ class priorityQ(object):
 
         self.Q = np.zeros(shape=shap)
 
-    def continous_2_descrete(self, obs):
+    def continuous_2_discrete(self, obs):
         location = self.Q
         for i in range(len(obs)):
             value = int(obs[i] * 100) % self.groups
@@ -42,11 +42,11 @@ class priorityQ(object):
     def take_action(self, obs):
         if random.random() < self.explore:
             return np.random.randint(0, self.action_space)
-        return np.argmax(self.continous_2_descrete(obs))
+        return np.argmax(self.continuous_2_discrete(obs))
 
     def add_to_queue(self, obs, action, next_obs, reward, index=None):
-        q_obs = self.continous_2_descrete(obs)
-        q_next_obs = self.continous_2_descrete(next_obs)
+        q_obs = self.continuous_2_discrete(obs)
+        q_next_obs = self.continuous_2_discrete(next_obs)
 
         p = abs(reward + self.gamma * max(q_next_obs) - q_obs[action])
         if p > self.theta:
@@ -57,8 +57,8 @@ class priorityQ(object):
             self.M.append([obs, action, next_obs, reward])
 
     def update(self):
-        q_obs = self.continous_2_descrete(self.P[0][0])
-        q_next_obs = self.continous_2_descrete(self.P[0][2])
+        q_obs = self.continuous_2_discrete(self.P[0][0])
+        q_next_obs = self.continuous_2_discrete(self.P[0][2])
 
         q_obs[self.P[0][1]] = (1 - self.alpha) * q_obs[self.P[0][1]] \
                               + self.alpha * (self.P[0][3]
