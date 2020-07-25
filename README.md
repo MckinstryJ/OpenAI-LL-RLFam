@@ -50,4 +50,4 @@
 </ol>
 
 Report:
-[Reinforcement Learning Family](https://docs.google.com/document/d/e/2PACX-1vT93-GN6mdClP1zJeyTQUk2YdvQiipTWF4P3O8rW2fca_JH6bMEyQUf8SWP5oTRUD1VP96l5-bfPzYg/pub).
+[Reinforcement Learning Models](https://docs.google.com/document/d/e/2PACX-1vT93-GN6mdClP1zJeyTQUk2YdvQiipTWF4P3O8rW2fca_JH6bMEyQUf8SWP5oTRUD1VP96l5-bfPzYg/pub).
