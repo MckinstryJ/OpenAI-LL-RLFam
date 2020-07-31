@@ -18,10 +18,10 @@
     import gym
 
 
-    def run(epochs=10):  # Epochs: number of rounds the ship should take.
+    def run(episodes=1000):  # Epochs: number of rounds the ship should take.
         printer = Printer()
-        for epoch in range(epochs):
-            print("EPOCH ------> {}".format(epoch+1))
+        for epi in range(episodes):
+            print("EPOCH ------> {}".format(epi + 1))
             done = False
             while not done:
                 env.render()  # Allows you to view the ship
