@@ -47,6 +47,7 @@
   <li><b>Dyna Q+</b>          --->(1000 best: -173.74)</li>
   <li><b>Double Q Learning</b>       --->(1000 best: -163.93)</li>
   <li><b>Priority Sweeping</b>       --->(1000 best: -146)</li>
+  <li><b>Delayed Q Learning</b>       --->(1000 best: -134)</li>
   <li><b>Generalized Priority Sweep</b>       --->(1000 best: -132)</li>
   <li><b>Deep Q Networks</b>  --->(1000 best: 236.30)</li>
 </ol>
